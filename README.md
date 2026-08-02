@@ -6,6 +6,8 @@
 **An open, agent-agnostic specification for disciplined, AI-assisted software
 engineering.**
 
+📖 [Browse the docs site](https://sergiorebolledo.github.io/engineering-loop-standard/) — same content as `docs/`, easier to navigate.
+
 AI coding tools change every few months. The methodology that makes them
 produce trustworthy code does not. The Engineering Loop Standard (ELS) is a
 small, versioned specification — `engineering-loop.json` plus a `docs/memory/`

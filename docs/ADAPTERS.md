@@ -1,3 +1,8 @@
+---
+title: Writing an Adapter
+nav_order: 3
+---
+
 # Writing an adapter
 
 An adapter turns `engineering-loop.json` + [MANIFESTO.md](https://github.com/sergiorebolledo/engineering-loop-standard/blob/main/MANIFESTO.md)

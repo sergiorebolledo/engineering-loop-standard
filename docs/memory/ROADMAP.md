@@ -27,11 +27,16 @@
 - [x] CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md.
 - [x] `examples/todo-api` — a real, tested project using the standard.
 
-## v1.2.0 (planned)
+## v1.2.0 (in progress)
 
-- [ ] `engineering-loop.org` documentation site generated from
-      `docs/SPECIFICATION.md`, with the schema eventually served from there
-      and registered on [SchemaStore.org](https://www.schemastore.org/).
+- [x] Documentation site generated from `docs/`, live at
+      [sergiorebolledo.github.io/engineering-loop-standard](https://sergiorebolledo.github.io/engineering-loop-standard/)
+      (GitHub Pages, `just-the-docs` theme, source: `main` / `docs`). No
+      custom domain needed to ship this — `engineering-loop.org` can be
+      pointed at the same Pages site via CNAME later without redoing
+      anything.
+- [ ] Point `engineering-loop.org` at the GitHub Pages site once bought.
+- [ ] Register the schema on [SchemaStore.org](https://www.schemastore.org/).
 
 ## Later / unscheduled
 

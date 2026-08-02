@@ -2,8 +2,8 @@
 
 ## Active
 
-- None — see [ROADMAP.md](ROADMAP.md) v1.2.0 for what's next
-  (`engineering-loop.org` docs site + SchemaStore registration).
+- None — see [ROADMAP.md](ROADMAP.md) v1.2.0 for what's left (point
+  `engineering-loop.org` at Pages once bought, SchemaStore registration).
 
 ## Backlog
 
@@ -11,6 +11,14 @@ See [ROADMAP.md](ROADMAP.md) for v1.2.0 and later.
 
 ## Done (recent)
 
+- 2026-08-02: Published the docs site — GitHub Pages (source: `main`/
+  `docs`, `just-the-docs` theme) enabled via the API, live at
+  sergiorebolledo.github.io/engineering-loop-standard. Didn't need
+  `engineering-loop.org` to ship this; DNS can point here later. Fixed
+  four relative links (`../MANIFESTO.md` etc.) that worked on GitHub's
+  file browser but would 404 on the published site since only `/docs` is
+  served, and caught a missing front-matter title on `ADAPTERS.md`
+  (nav showed the raw H1 instead) by checking the live nav after deploy.
 - 2026-08-02: Shipped v1.1.0 — `engineering-loop sync` (managed-block
   merge, ADR-008) and a Windsurf adapter, both requested by the
   maintainer. Caught and fixed a real idempotency bug before publishing
