@@ -15,16 +15,23 @@
       resolvable URL (tagged raw GitHub content) instead of the aspirational
       `engineering-loop.org` domain.
 
-## v1.1.0 (planned)
+## v1.1.0 (shipped 2026-08-02)
 
-- [ ] `engineering-loop sync` — re-render adapters after
-      `engineering-loop.json` changes, without touching hand-edited sections.
+- [x] `engineering-loop sync` — re-renders each adapter's managed block
+      (`<!-- engineering-loop:managed:start/end -->`) from the current
+      `engineering-loop.json`, leaving content outside the block untouched.
+      Skips files with no managed block at all rather than risk overwriting
+      hand-authored content. See ADR-008/ADR-009.
+- [x] Adapter for Windsurf (`.windsurfrules`), now in the default adapter
+      set alongside Claude/Cursor/Aider/Codex.
+- [x] CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md.
+- [x] `examples/todo-api` — a real, tested project using the standard.
+
+## v1.2.0 (planned)
+
 - [ ] `engineering-loop.org` documentation site generated from
       `docs/SPECIFICATION.md`, with the schema eventually served from there
       and registered on [SchemaStore.org](https://www.schemastore.org/).
-- [ ] Adapter for Windsurf.
-- [x] CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md.
-- [x] `examples/todo-api` — a real, tested project using the standard.
 
 ## Later / unscheduled
 

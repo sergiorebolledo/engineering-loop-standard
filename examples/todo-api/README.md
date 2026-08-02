@@ -15,7 +15,8 @@ test/server.test.js      7 tests, node:test + global fetch, no dependencies
 engineering-loop.json    this project's ELS config (hand-tuned after `init`)
 docs/memory/             real PROJECT/ARCHITECTURE/ROADMAP/TASKS/DECISIONS/KNOWLEDGE
 CLAUDE.md, .cursorrules,
-CONVENTIONS.md, AGENTS.md  generated adapters (see docs/ADAPTERS.md upstream)
+CONVENTIONS.md, AGENTS.md,
+.windsurfrules             generated adapters (see docs/ADAPTERS.md upstream)
 ```
 
 ## Run it
@@ -46,13 +47,16 @@ memory-exhaustion footgun (OWASP API4:2023) in code meant to be copied.
 1. Wrote `src/server.js`/`src/index.js` and `test/server.test.js` first —
    the actual working code.
 2. Ran `engineering-loop init` from the repo root to scaffold
-   `engineering-loop.json`, `docs/memory/`, and the four adapters.
+   `engineering-loop.json`, `docs/memory/`, and the five adapters.
 3. Hand-tuned `engineering-loop.json` (added a description, removed the
    default `build` command — this project has no build step) and the
    memory files with content specific to this project, not the blank
    templates `init` leaves behind.
-4. Ran `npm run doctor` (via the CLI's own `dist/index.js doctor`) to
+4. Ran `engineering-loop sync` to reconcile the five adapter files with
+   the hand-tuned config — no `init --force`, which would have wiped the
+   `docs/memory/` content back to blank templates.
+5. Ran `npm run doctor` (via the CLI's own `dist/index.js doctor`) to
    confirm the result still conforms to the schema.
 
 See [docs/memory/KNOWLEDGE.md](docs/memory/KNOWLEDGE.md) for a rough edge
-this surfaced in the standard itself.
+this surfaced in the standard itself, and how `sync` fixed it.

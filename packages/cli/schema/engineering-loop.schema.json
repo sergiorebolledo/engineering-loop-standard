@@ -122,9 +122,9 @@
       "description": "Adapters to generate when running `engineering-loop init` or `engineering-loop sync`.",
       "items": {
         "type": "string",
-        "enum": ["claude", "cursor", "aider", "codex", "gemini"]
+        "enum": ["claude", "cursor", "aider", "codex", "gemini", "windsurf"]
       },
-      "default": ["claude", "cursor", "aider", "codex"]
+      "default": ["claude", "cursor", "aider", "codex", "windsurf"]
     }
   }
 }

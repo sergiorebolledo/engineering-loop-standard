@@ -35,4 +35,4 @@ export interface EngineeringLoopConfig {
   adapters?: AdapterId[];
 }
 
-export type AdapterId = "claude" | "cursor" | "aider" | "codex" | "gemini";
+export type AdapterId = "claude" | "cursor" | "aider" | "codex" | "gemini" | "windsurf";

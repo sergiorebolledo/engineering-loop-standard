@@ -4,6 +4,7 @@ import { claudeAdapter } from "./claude.js";
 import { codexAdapter } from "./codex.js";
 import { cursorAdapter } from "./cursor.js";
 import type { Adapter } from "./types.js";
+import { windsurfAdapter } from "./windsurf.js";
 
 export const ADAPTERS: Record<AdapterId, Adapter> = {
   claude: claudeAdapter,
@@ -12,6 +13,7 @@ export const ADAPTERS: Record<AdapterId, Adapter> = {
   codex: codexAdapter,
   // Gemini currently shares the AGENTS.md convention with Codex.
   gemini: codexAdapter,
+  windsurf: windsurfAdapter,
 };
 
 export function resolveAdapters(ids: AdapterId[]): Adapter[] {

@@ -4,6 +4,49 @@ Architecture Decision Records. Newest first.
 
 ---
 
+## ADR-009: `wrapManaged()` must not add its own trailing newline
+
+**Date:** 2026-08-02
+**Status:** Accepted
+
+Found while writing `sync`'s own tests: the first implementation had
+`wrapManaged()` append a trailing `\n` after `MANAGED_END`, and `sync`'s
+splice logic *also* preserved whatever trailing content already followed
+`MANAGED_END` in the existing file. On a freshly `init`'d file (nothing
+outside the managed block yet), both contributed a newline, so every
+`sync` run — even with an unchanged config — flagged the file as
+"updated" and appended one more blank line than the last run. Caught by
+an idempotency test (`sync` twice in a row must produce byte-identical
+output) before it shipped.
+
+Fixed by making `wrapManaged()` end exactly at `MANAGED_END` with no
+trailing newline; `init` and `sync`'s "file didn't exist yet" branch each
+add their own single `\n` when writing a brand new file, and `sync`'s
+splice always sources trailing whitespace from the existing file, never
+from the freshly rendered block. Only one of the two is ever responsible
+for the newline at any given moment.
+
+## ADR-008: Adapter output uses a managed-block marker so `sync` can merge safely
+
+**Date:** 2026-08-02
+**Status:** Accepted
+
+`engineering-loop sync` (ROADMAP v1.1.0) needs to re-render an adapter file
+after a config change without destroying anything a developer hand-added
+to that same file. Considered a templating engine with named insertion
+points; rejected as overkill for four-to-five flat Markdown/text files.
+
+Chosen instead: every adapter wraps its full output in
+`<!-- engineering-loop:managed:start -->` / `...:end` HTML-comment markers
+via a shared `wrapManaged()` helper. `sync` locates the markers in the
+existing file and replaces only what's between them; everything before the
+start marker and after the end marker is copied through unchanged. If no
+markers are found — the file was hand-authored, or produced by the
+pre-1.1.0 CLI which didn't emit them — `sync` skips the file entirely
+rather than guess. See §5.1 of
+[docs/SPECIFICATION.md](../SPECIFICATION.md) and
+[docs/ADAPTERS.md](../ADAPTERS.md) for the adapter-author-facing contract.
+
 ## ADR-007: `doctor` validates that `memory.directory`/`required_files` stay inside the project
 
 **Date:** 2026-08-02

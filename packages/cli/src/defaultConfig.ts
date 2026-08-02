@@ -15,7 +15,7 @@ export const DEFAULT_MEMORY_FILES = [
   "KNOWLEDGE.md",
 ];
 
-export const DEFAULT_ADAPTERS: AdapterId[] = ["claude", "cursor", "aider", "codex"];
+export const DEFAULT_ADAPTERS: AdapterId[] = ["claude", "cursor", "aider", "codex", "windsurf"];
 
 export function buildDefaultConfig(projectName: string): EngineeringLoopConfig {
   return {

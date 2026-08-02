@@ -57,16 +57,19 @@ flowchart TD
     Config --> CursorA["Cursor adapter"]
     Config --> AiderA["Aider adapter"]
     Config --> CodexA["Codex / Gemini adapter"]
+    Config --> WindsurfA["Windsurf adapter"]
 
     ClaudeA --> ClaudeF["CLAUDE.md"]
     CursorA --> CursorF[".cursorrules"]
     AiderA --> AiderF["CONVENTIONS.md"]
     CodexA --> CodexF["AGENTS.md"]
+    WindsurfA --> WindsurfF[".windsurfrules"]
 
     ClaudeF --> Repo
     CursorF --> Repo
     AiderF --> Repo
     CodexF --> Repo
+    WindsurfF --> Repo
 
     Repo["<b>Developer's repository</b><br/>docs/memory/ · 10-phase loop · engineering-loop doctor"]
 ```
@@ -118,11 +121,18 @@ npx engineering-loop init
 
 ```
 ✔ Created engineering-loop.json
-✔ Initialized docs/memory/ (PROJECT.md, ARCHITECTURE.md, ROADMAP.md, TASKS.md, DECISIONS.md, KNOWLEDGE.md)
-✔ Generated adapter: Claude Code (CLAUDE.md)
-✔ Generated adapter: Cursor (.cursorrules)
-✔ Generated adapter: Aider (CONVENTIONS.md)
-✔ Generated adapter: Codex / Gemini (AGENTS.md)
+✔ Created docs/memory/ARCHITECTURE.md
+✔ Created docs/memory/DECISIONS.md
+✔ Created docs/memory/KNOWLEDGE.md
+✔ Created docs/memory/PROJECT.md
+✔ Created docs/memory/ROADMAP.md
+✔ Created docs/memory/TASKS.md
+✔ Created CLAUDE.md
+✔ Created .cursorrules
+✔ Created CONVENTIONS.md
+✔ Created AGENTS.md
+✔ Created .windsurfrules
+
 Engineering Loop ready.
 ```
 
@@ -131,6 +141,18 @@ Only need specific adapters?
 ```bash
 npx engineering-loop init --adapters claude,cursor
 ```
+
+Changed `engineering-loop.json` and want the adapter files to catch up
+without losing hand-edited content?
+
+```bash
+npx engineering-loop sync
+```
+
+`sync` only touches the generated block of each file (wrapped in
+`<!-- engineering-loop:managed:... -->` markers) — anything you added
+outside it survives. A file with no managed block at all is skipped, not
+overwritten.
 
 Check that an existing project still conforms to the spec:
 

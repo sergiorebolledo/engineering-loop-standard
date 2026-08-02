@@ -69,7 +69,7 @@ export async function runInit(options: InitOptions): Promise<InitResult> {
   const adapters = resolveAdapters(adapterIds);
   for (const adapter of adapters) {
     const outputPath = join(targetDir, adapter.outputPath);
-    await writeIfAllowed(outputPath, adapter.render(config), Boolean(options.force), result);
+    await writeIfAllowed(outputPath, `${adapter.render(config)}\n`, Boolean(options.force), result);
   }
 
   return result;

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ADAPTERS, resolveAdapters } from "../src/adapters/index.js";
+import { MANAGED_END, MANAGED_START } from "../src/adapters/shared.js";
 import { buildDefaultConfig } from "../src/defaultConfig.js";
 
 describe("adapters", () => {
@@ -29,10 +30,20 @@ describe("adapters", () => {
     expect(ADAPTERS.cursor.outputPath).toBe(".cursorrules");
     expect(ADAPTERS.aider.outputPath).toBe("CONVENTIONS.md");
     expect(ADAPTERS.codex.outputPath).toBe("AGENTS.md");
+    expect(ADAPTERS.windsurf.outputPath).toBe(".windsurfrules");
   });
 
   it("gemini shares the codex AGENTS.md convention", () => {
     expect(ADAPTERS.gemini.outputPath).toBe("AGENTS.md");
+  });
+
+  it("wraps every adapter's output in exactly one managed block", () => {
+    for (const adapter of Object.values(ADAPTERS)) {
+      const output = adapter.render(config);
+      expect(output.indexOf(MANAGED_START)).toBe(output.lastIndexOf(MANAGED_START));
+      expect(output.indexOf(MANAGED_END)).toBe(output.lastIndexOf(MANAGED_END));
+      expect(output.indexOf(MANAGED_START)).toBeLessThan(output.indexOf(MANAGED_END));
+    }
   });
 
   it("resolveAdapters deduplicates by output path", () => {

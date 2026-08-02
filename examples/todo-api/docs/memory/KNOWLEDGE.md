@@ -2,13 +2,16 @@
 
 Domain insights and lessons that aren't obvious from reading the code.
 
-- **Editing `engineering-loop.json` by hand doesn't update the generated
-  adapters.** After customizing `commands` in this project's config (removed
-  a `build` step this project doesn't have), the four adapter files
-  (`CLAUDE.md`, `.cursorrules`, `CONVENTIONS.md`, `AGENTS.md`) still had the
-  stale command until edited manually — there's no `engineering-loop sync`
-  yet (tracked in the standard's own
-  [ROADMAP.md](../../../../docs/memory/ROADMAP.md)). Until that ships,
-  re-running `init --force` regenerates everything from scratch (including
-  overwriting hand customizations to `engineering-loop.json` itself), so
-  hand-editing adapters is currently the only non-destructive option.
+- **Editing `engineering-loop.json` by hand now updates the generated
+  adapters via `engineering-loop sync`.** This used to require hand-editing
+  four files (or `init --force`, which also wiped this project's
+  hand-written `docs/memory/` content back to blank templates — happened
+  for real while regenerating this example for 5 adapters, restored from
+  git). `sync` re-renders only the `<!-- engineering-loop:managed:... -->`
+  block each adapter file wraps its content in, leaving anything appended
+  outside it — and every other file `sync` doesn't touch — alone. This
+  project's 5 adapter files were regenerated with `init --force` once (to
+  pick up the new managed-block format and the Windsurf adapter), then
+  `engineering-loop.json` was hand-tuned (description, dropped the
+  `build` command) and reconciled with `engineering-loop sync` instead of
+  another destructive `init --force`.
