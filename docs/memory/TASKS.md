@@ -2,10 +2,9 @@
 
 ## Active
 
-- None — see [ROADMAP.md](ROADMAP.md) v1.1.0 for what's next
-  (`engineering-loop sync`, Windsurf adapter). `engineering-loop@1.0.1`
-  (the `$schema` fix) is built and verified but not yet published to npm —
-  npm still serves the buggy 1.0.0.
+- Resolving `npm audit` findings in CLI dev-dependencies (4 vulnerabilities,
+  transitive via vitest/esbuild's dev server — not shipped in the
+  published package, but worth clearing).
 
 ## Backlog
 
@@ -13,6 +12,9 @@ See [ROADMAP.md](ROADMAP.md) for v1.1.0 and later.
 
 ## Done (recent)
 
+- 2026-08-02: Published `engineering-loop@1.0.1` to npm and verified via a
+  real `npx engineering-loop@1.0.1 init` that the `$schema` fix reached
+  end users.
 - 2026-08-02: Added `examples/todo-api` — a real, tested (7 passing tests),
   zero-dependency service with hand-tuned `engineering-loop.json` and
   filled `docs/memory/`, not a blank scaffold. Surfaced and fixed two real
