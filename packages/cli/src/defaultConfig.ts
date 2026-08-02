@@ -1,5 +1,11 @@
 import type { AdapterId, EngineeringLoopConfig } from "./types.js";
 
+// A relative path here would break the moment `init` writes it into a
+// project, since the schema file isn't copied alongside it. Point at the
+// tagged spec release instead, which always resolves.
+export const SCHEMA_URL =
+  "https://raw.githubusercontent.com/sergiorebolledo/engineering-loop-standard/v1.0.0/engineering-loop.schema.json";
+
 export const DEFAULT_MEMORY_FILES = [
   "PROJECT.md",
   "ARCHITECTURE.md",
@@ -13,7 +19,7 @@ export const DEFAULT_ADAPTERS: AdapterId[] = ["claude", "cursor", "aider", "code
 
 export function buildDefaultConfig(projectName: string): EngineeringLoopConfig {
   return {
-    $schema: "./engineering-loop.schema.json",
+    $schema: SCHEMA_URL,
     version: "1.0.0",
     project: {
       name: projectName,

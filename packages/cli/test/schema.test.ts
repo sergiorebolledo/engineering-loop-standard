@@ -9,6 +9,14 @@ describe("validateConfig", () => {
     expect(valid).toBe(true);
   });
 
+  it("gives buildDefaultConfig an absolute, resolvable $schema", () => {
+    // A relative path (e.g. "./engineering-loop.schema.json") would break
+    // the moment `init` writes it into a project that never gets a copy of
+    // the schema file alongside it.
+    const config = buildDefaultConfig("sample-app");
+    expect(config.$schema).toMatch(/^https:\/\//);
+  });
+
   it("rejects a config missing required fields", () => {
     const { valid, errors } = validateConfig({ version: "1.0.0" });
     expect(valid).toBe(false);

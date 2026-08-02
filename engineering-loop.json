@@ -1,5 +1,5 @@
 {
-  "$schema": "./engineering-loop.schema.json",
+  "$schema": "https://raw.githubusercontent.com/sergiorebolledo/engineering-loop-standard/v1.0.0/engineering-loop.schema.json",
   "version": "1.0.0",
   "project": {
     "name": "engineering-loop-standard",

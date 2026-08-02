@@ -118,7 +118,7 @@ generated from. Full schema at
 
 ```json
 {
-  "$schema": "https://engineering-loop.org/schema/v1.json",
+  "$schema": "https://raw.githubusercontent.com/sergiorebolledo/engineering-loop-standard/v1.0.0/engineering-loop.schema.json",
   "version": "1.0.0",
   "project": {
     "name": "my-app",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://engineering-loop.org/schema/v1.json",
+  "$id": "https://raw.githubusercontent.com/sergiorebolledo/engineering-loop-standard/v1.0.0/engineering-loop.schema.json",
   "title": "Engineering Loop Standard Configuration",
   "description": "Formal schema for engineering-loop.json, the single source of truth an Engineering Loop Standard adapter is generated from.",
   "type": "object",
