@@ -17,6 +17,7 @@
   "scripts": {
     "build": "npm run build --workspace packages/cli",
     "test": "npm test --workspace packages/cli",
-    "lint": "npm run lint --workspace packages/cli"
+    "lint": "npm run lint --workspace packages/cli",
+    "doctor": "node packages/cli/dist/index.js doctor --dir ."
   }
 }
