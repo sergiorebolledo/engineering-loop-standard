@@ -2,9 +2,7 @@
 
 ## Active
 
-- Resolving `npm audit` findings in CLI dev-dependencies (4 vulnerabilities,
-  transitive via vitest/esbuild's dev server — not shipped in the
-  published package, but worth clearing).
+- None — see [ROADMAP.md](ROADMAP.md) v1.1.0 for what's next.
 
 ## Backlog
 
@@ -12,6 +10,11 @@ See [ROADMAP.md](ROADMAP.md) for v1.1.0 and later.
 
 ## Done (recent)
 
+- 2026-08-02: Cleared all 4 `npm audit` findings (esbuild dev-server
+  vulnerability, transitive via vite/vite-node) by bumping vitest
+  1.6 -> 4.1.10 in `packages/cli`. Dev-dependency only — no change to the
+  published package, no new npm publish needed. All 22 tests, build, and
+  lint pass unmodified on vitest 4.
 - 2026-08-02: Published `engineering-loop@1.0.1` to npm and verified via a
   real `npx engineering-loop@1.0.1 init` that the `$schema` fix reached
   end users.
