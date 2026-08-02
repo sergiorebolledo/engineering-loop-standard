@@ -23,6 +23,16 @@ npx engineering-loop doctor
 | `-n, --name <name>` | Project name written into `engineering-loop.json` | directory name |
 | `-a, --adapters <list>` | Comma-separated adapter ids (`claude,cursor,aider,codex,gemini,windsurf`) | `claude,cursor,aider,codex,windsurf` |
 | `-f, --force` | Overwrite existing files | `false` |
+| `--obsidian` | Also write a minimal `.obsidian/` config into the memory directory | `false` |
+
+`docs/memory/` is already valid [Obsidian](https://obsidian.md/) vault
+content as-is — plain Markdown, standard `[text](file.md)` links, no
+wikilink syntax required. `--obsidian` just drops in `app.json` (forces
+new links Obsidian creates to stay in that same relative-Markdown style,
+instead of switching to `[[wikilinks]]`) and a `graph.json` with each
+memory file color-coded, so the graph view is legible on first open. No
+community plugins, no `workspace.json` — just enough to open the folder
+and get a useful graph, nothing that assumes you use Obsidian daily.
 
 ### `sync`
 

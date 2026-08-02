@@ -59,4 +59,30 @@ describe("runInit", () => {
     const config = JSON.parse(await readFile(join(dir, "engineering-loop.json"), "utf-8"));
     expect(config.project.name).toBe(dir.split(/[\\/]/).pop());
   });
+
+  it("does not create a .obsidian config by default", async () => {
+    await runInit({ dir, name: "my-app" });
+    expect(existsSync(join(dir, "docs/memory/.obsidian"))).toBe(false);
+  });
+
+  it("creates a minimal .obsidian config when obsidian is requested", async () => {
+    const result = await runInit({ dir, name: "my-app", obsidian: true });
+    const appJsonPath = join(dir, "docs/memory/.obsidian/app.json");
+    const graphJsonPath = join(dir, "docs/memory/.obsidian/graph.json");
+    expect(existsSync(appJsonPath)).toBe(true);
+    expect(existsSync(graphJsonPath)).toBe(true);
+    expect(result.created).toContain(appJsonPath);
+
+    const appConfig = JSON.parse(await readFile(appJsonPath, "utf-8"));
+    expect(appConfig.useMarkdownLinks).toBe(true);
+    // Valid JSON is enough of a check for graph.json; its content is cosmetic.
+    JSON.parse(await readFile(graphJsonPath, "utf-8"));
+  });
+
+  it("does not overwrite an existing .obsidian config without --force", async () => {
+    await runInit({ dir, name: "my-app", obsidian: true });
+    const appJsonPath = join(dir, "docs/memory/.obsidian/app.json");
+    const result = await runInit({ dir, name: "my-app", obsidian: true });
+    expect(result.skipped).toContain(appJsonPath);
+  });
 });

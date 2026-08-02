@@ -3,7 +3,7 @@ import { copyFile, mkdir, readdir, writeFile } from "node:fs/promises";
 import { basename, join } from "node:path";
 import { resolveAdapters } from "../adapters/index.js";
 import { buildDefaultConfig } from "../defaultConfig.js";
-import { TEMPLATES_DIR } from "../paths.js";
+import { OBSIDIAN_TEMPLATES_DIR, TEMPLATES_DIR } from "../paths.js";
 import type { AdapterId, EngineeringLoopConfig } from "../types.js";
 
 export interface InitOptions {
@@ -11,6 +11,7 @@ export interface InitOptions {
   name?: string;
   adapters?: AdapterId[];
   force?: boolean;
+  obsidian?: boolean;
 }
 
 export interface InitResult {
@@ -70,6 +71,21 @@ export async function runInit(options: InitOptions): Promise<InitResult> {
   for (const adapter of adapters) {
     const outputPath = join(targetDir, adapter.outputPath);
     await writeIfAllowed(outputPath, `${adapter.render(config)}\n`, Boolean(options.force), result);
+  }
+
+  if (options.obsidian) {
+    const obsidianDir = join(memoryDir, ".obsidian");
+    await mkdir(obsidianDir, { recursive: true });
+    const obsidianFiles = await readdir(OBSIDIAN_TEMPLATES_DIR);
+    for (const file of obsidianFiles) {
+      const destination = join(obsidianDir, file);
+      if (!options.force && existsSync(destination)) {
+        result.skipped.push(destination);
+        continue;
+      }
+      await copyFile(join(OBSIDIAN_TEMPLATES_DIR, file), destination);
+      result.created.push(destination);
+    }
   }
 
   return result;

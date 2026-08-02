@@ -35,6 +35,8 @@
       custom domain needed to ship this — `engineering-loop.org` can be
       pointed at the same Pages site via CNAME later without redoing
       anything.
+- [x] `init --obsidian` — optional minimal Obsidian vault config
+      (`app.json`, `graph.json`) for `docs/memory/`. See ADR-010.
 - [ ] Point `engineering-loop.org` at the GitHub Pages site once bought.
 - [ ] Register the schema on [SchemaStore.org](https://www.schemastore.org/).
 

@@ -4,6 +4,21 @@ All notable changes to the Engineering Loop Standard follow
 [Conventional Commits](https://www.conventionalcommits.org/) and this
 project's own semver (§6 of [docs/SPECIFICATION.md](docs/SPECIFICATION.md)).
 
+## [engineering-loop@1.2.0] - 2026-08-02
+
+### Added
+
+- `feat(cli)`: `init --obsidian` — writes a minimal `.obsidian/` config
+  (`app.json`, `graph.json`) into the memory directory. `docs/memory/` is
+  already valid [Obsidian](https://obsidian.md/) vault content unmodified;
+  this just keeps Obsidian-created links in the same Markdown style the
+  rest of the vault uses, and color-codes the graph view. Opt-in, no
+  community plugins, existing files never overwritten without `--force`.
+  See ADR-010 in [docs/memory/DECISIONS.md](docs/memory/DECISIONS.md).
+- `docs`: published the specification as a GitHub Pages site at
+  [sergiorebolledo.github.io/engineering-loop-standard](https://sergiorebolledo.github.io/engineering-loop-standard/)
+  — no custom domain purchase required to ship this.
+
 ## [engineering-loop@1.1.0] - 2026-08-02
 
 ### Added

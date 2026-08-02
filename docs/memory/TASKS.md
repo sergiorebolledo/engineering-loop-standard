@@ -11,6 +11,10 @@ See [ROADMAP.md](ROADMAP.md) for v1.2.0 and later.
 
 ## Done (recent)
 
+- 2026-08-02: Added `init --obsidian` (ADR-010) — opt-in minimal
+  `.obsidian/` config (`app.json` forcing Markdown-style links,
+  color-coded `graph.json`) for `docs/memory/`, since it's already valid
+  Obsidian vault content unmodified. Bumped CLI to 1.2.0.
 - 2026-08-02: Published the docs site — GitHub Pages (source: `main`/
   `docs`, `just-the-docs` theme) enabled via the API, live at
   sergiorebolledo.github.io/engineering-loop-standard. Didn't need

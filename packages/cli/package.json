@@ -1,6 +1,6 @@
 {
   "name": "engineering-loop",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "CLI for the Engineering Loop Standard: scaffold engineering-loop.json, persistent project memory, and multi-tool AI agent adapters.",
   "license": "MIT",
   "type": "module",

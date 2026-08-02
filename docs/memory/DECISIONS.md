@@ -4,6 +4,39 @@ Architecture Decision Records. Newest first.
 
 ---
 
+## ADR-010: `--obsidian` is opt-in, ships only `app.json` + `graph.json`
+
+**Date:** 2026-08-02
+**Status:** Accepted
+
+Maintainer asked whether [Obsidian](https://obsidian.md/) could improve the
+project. `docs/memory/` already works as an Obsidian vault unmodified — it's
+plain Markdown with standard `[text](file.md)` links, and Obsidian doesn't
+require wikilink syntax. The only real gap: Obsidian defaults to creating
+*new* links as `[[wikilinks]]`, which would start drifting the vault's link
+style away from what GitHub renders correctly.
+
+Considered making this the default for every `init`. Rejected — not
+everyone uses Obsidian, and dropping a `.obsidian/` folder into every
+generated project regardless is exactly the kind of unrequested footprint
+this standard's own manifesto argues against. Made it an opt-in
+`--obsidian` flag instead.
+
+Scope of what gets written, deliberately narrow:
+- `app.json` — sets `useMarkdownLinks: true` so Obsidian keeps creating
+  standard Markdown links, not wikilinks. This is the one setting that
+  actually prevents breakage.
+- `graph.json` — color-codes the six memory files so the graph view is
+  legible on first open, cosmetic only.
+
+Deliberately NOT shipped: any community plugin (would need network access
+and user approval), `core-plugins.json` (Obsidian's own defaults already
+enable graph/backlinks/outline; shipping an incomplete enable-list risked
+disabling something), `workspace.json` (personal, changes every session,
+shouldn't be a template). Existing files are never overwritten without
+`--force`, same as every other `init` output — this doesn't get special
+treatment just because it's new.
+
 ## ADR-009: `wrapManaged()` must not add its own trailing newline
 
 **Date:** 2026-08-02

@@ -1,0 +1,29 @@
+{
+  "collapse-filter": true,
+  "search": "",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    { "query": "path:PROJECT.md", "color": { "a": 1, "rgb": 5016565 } },
+    { "query": "path:ARCHITECTURE.md", "color": { "a": 1, "rgb": 10181046 } },
+    { "query": "path:ROADMAP.md", "color": { "a": 1, "rgb": 3066993 } },
+    { "query": "path:TASKS.md", "color": { "a": 1, "rgb": 15844367 } },
+    { "query": "path:DECISIONS.md", "color": { "a": 1, "rgb": 15158332 } },
+    { "query": "path:KNOWLEDGE.md", "color": { "a": 1, "rgb": 1752220 } }
+  ],
+  "collapse-display": false,
+  "showArrow": false,
+  "textFadeMultiplier": 0,
+  "nodeSizeMultiplier": 1,
+  "lineSizeMultiplier": 1,
+  "collapse-forces": false,
+  "centerStrength": 0.5,
+  "repelStrength": 10,
+  "linkStrength": 1,
+  "linkDistance": 250,
+  "scale": 1,
+  "close": false
+}

@@ -52,27 +52,41 @@ program
     "comma-separated adapters to generate (claude,cursor,aider,codex,gemini,windsurf)",
   )
   .option("-f, --force", "overwrite existing files", false)
-  .action(async (opts: { dir: string; name?: string; adapters?: string; force: boolean }) => {
-    try {
-      const adapters = opts.adapters ? parseAdapters(opts.adapters) : undefined;
-      const result = await runInit({
-        dir: opts.dir,
-        name: opts.name,
-        adapters,
-        force: opts.force,
-      });
-      for (const file of result.created) {
-        console.log(`✔ Created ${file}`);
+  .option(
+    "--obsidian",
+    "also write a minimal .obsidian/ config into the memory directory, so it opens as an Obsidian vault with a sensible graph view",
+    false,
+  )
+  .action(
+    async (opts: {
+      dir: string;
+      name?: string;
+      adapters?: string;
+      force: boolean;
+      obsidian: boolean;
+    }) => {
+      try {
+        const adapters = opts.adapters ? parseAdapters(opts.adapters) : undefined;
+        const result = await runInit({
+          dir: opts.dir,
+          name: opts.name,
+          adapters,
+          force: opts.force,
+          obsidian: opts.obsidian,
+        });
+        for (const file of result.created) {
+          console.log(`✔ Created ${file}`);
+        }
+        for (const file of result.skipped) {
+          console.log(`– Skipped ${file} (already exists, use --force to overwrite)`);
+        }
+        console.log("\nEngineering Loop ready.");
+      } catch (error) {
+        console.error(error instanceof Error ? error.message : String(error));
+        process.exitCode = 1;
       }
-      for (const file of result.skipped) {
-        console.log(`– Skipped ${file} (already exists, use --force to overwrite)`);
-      }
-      console.log("\nEngineering Loop ready.");
-    } catch (error) {
-      console.error(error instanceof Error ? error.message : String(error));
-      process.exitCode = 1;
-    }
-  });
+    },
+  );
 
 program
   .command("doctor")

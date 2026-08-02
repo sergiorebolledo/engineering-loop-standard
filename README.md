@@ -165,6 +165,15 @@ npx engineering-loop doctor
 Want to see it applied to a real, working project instead of a bare
 scaffold? See [examples/todo-api](examples/todo-api).
 
+`docs/memory/` is already a valid [Obsidian](https://obsidian.md/) vault —
+plain Markdown, standard links, nothing Obsidian-specific required. Add
+`--obsidian` to `init` for a minimal `.obsidian/` config (color-coded graph
+view, links stay in Markdown format instead of switching to wikilinks):
+
+```bash
+npx engineering-loop init --obsidian
+```
+
 ## The configuration file
 
 `engineering-loop.json` is the single source of truth every adapter is

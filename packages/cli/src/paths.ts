@@ -9,4 +9,5 @@ const thisFileDir = dirname(fileURLToPath(import.meta.url));
 export const PACKAGE_ROOT = dirname(thisFileDir);
 
 export const TEMPLATES_DIR = join(PACKAGE_ROOT, "templates", "memory");
+export const OBSIDIAN_TEMPLATES_DIR = join(PACKAGE_ROOT, "templates", "obsidian");
 export const SCHEMA_PATH = join(PACKAGE_ROOT, "schema", "engineering-loop.schema.json");
