@@ -3,6 +3,14 @@
   "private": true,
   "description": "Open, agent-agnostic specification and tooling for disciplined AI-assisted software engineering.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergiorebolledo/engineering-loop-standard.git"
+  },
+  "homepage": "https://github.com/sergiorebolledo/engineering-loop-standard#readme",
+  "bugs": {
+    "url": "https://github.com/sergiorebolledo/engineering-loop-standard/issues"
+  },
   "workspaces": [
     "packages/*"
   ],

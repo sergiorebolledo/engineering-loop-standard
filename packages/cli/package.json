@@ -44,5 +44,14 @@
     "codex",
     "specification",
     "cli"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergiorebolledo/engineering-loop-standard.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/sergiorebolledo/engineering-loop-standard#readme",
+  "bugs": {
+    "url": "https://github.com/sergiorebolledo/engineering-loop-standard/issues"
+  }
 }

@@ -1,5 +1,8 @@
 # Engineering Loop Standard
 
+[![npm version](https://img.shields.io/npm/v/engineering-loop.svg)](https://www.npmjs.com/package/engineering-loop)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 **An open, agent-agnostic specification for disciplined, AI-assisted software
 engineering.**
 
