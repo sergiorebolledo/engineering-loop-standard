@@ -11,6 +11,9 @@ See [ROADMAP.md](ROADMAP.md) for v1.2.0 and later.
 
 ## Done (recent)
 
+- 2026-08-02: Published `engineering-loop@1.2.0` to npm and verified via a
+  real `npx engineering-loop@1.2.0 init --obsidian` that the Obsidian
+  config reaches end users.
 - 2026-08-02: Added `init --obsidian` (ADR-010) — opt-in minimal
   `.obsidian/` config (`app.json` forcing Markdown-style links,
   color-coded `graph.json`) for `docs/memory/`, since it's already valid
