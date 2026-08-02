@@ -110,6 +110,9 @@ Check that an existing project still conforms to the spec:
 npx engineering-loop doctor
 ```
 
+Want to see it applied to a real, working project instead of a bare
+scaffold? See [examples/todo-api](examples/todo-api).
+
 ## The configuration file
 
 `engineering-loop.json` is the single source of truth every adapter is
@@ -165,6 +168,7 @@ generated from. Full schema at
 ├── engineering-loop.schema.json   # Formal JSON Schema for the config
 ├── MANIFESTO.md                   # Standalone Agentic Engineering Manifesto
 ├── CLAUDE.md                      # Claude Code adapter for this repo
+├── CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md
 ├── docs/
 │   ├── SPECIFICATION.md           # Full standard, versioned
 │   ├── ADAPTERS.md                # How adapters work, how to add one
@@ -177,7 +181,8 @@ generated from. Full schema at
 │       └── KNOWLEDGE.md
 ├── packages/
 │   └── cli/                       # `engineering-loop` npm package
-└── prompts/                       # Reusable, tool-agnostic role prompts
+└── examples/
+    └── todo-api/                  # Worked example: a real ELS-compliant project
 ```
 
 ## Versioning

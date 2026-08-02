@@ -1,0 +1,52 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sergiorebolledo/engineering-loop-standard/v1.0.0/engineering-loop.schema.json",
+  "version": "1.0.0",
+  "project": {
+    "name": "todo-api-example",
+    "description": "Minimal, zero-dependency Todo REST API used as a worked example of the Engineering Loop Standard.",
+    "architecture_style": "single-service"
+  },
+  "memory": {
+    "directory": "docs/memory",
+    "required_files": [
+      "PROJECT.md",
+      "ARCHITECTURE.md",
+      "ROADMAP.md",
+      "TASKS.md",
+      "DECISIONS.md",
+      "KNOWLEDGE.md"
+    ]
+  },
+  "pipeline": {
+    "pre_code": [
+      "research",
+      "plan"
+    ],
+    "post_code": [
+      "lint",
+      "test",
+      "refactor",
+      "update_docs"
+    ]
+  },
+  "commands": {
+    "test": "npm test",
+    "lint": "npm run lint"
+  },
+  "language_policy": {
+    "code": "en",
+    "comments": "en",
+    "docs": "en",
+    "commits": "en"
+  },
+  "agents": {
+    "allow_auto_fix": true,
+    "max_repair_iterations": 3
+  },
+  "adapters": [
+    "claude",
+    "cursor",
+    "aider",
+    "codex"
+  ]
+}

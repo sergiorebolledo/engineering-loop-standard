@@ -1,0 +1,16 @@
+{
+  "name": "todo-api-example",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Worked example: a minimal, zero-dependency Todo REST API that has adopted the Engineering Loop Standard.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test test/server.test.js",
+    "lint": "node --check src/server.js && node --check src/index.js",
+    "doctor": "node ../../packages/cli/dist/index.js doctor --dir ."
+  }
+}

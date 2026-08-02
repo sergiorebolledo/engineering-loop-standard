@@ -24,7 +24,7 @@
       and registered on [SchemaStore.org](https://www.schemastore.org/).
 - [ ] Adapter for Windsurf.
 - [x] CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md.
-- [ ] `examples/` with a real project using the standard.
+- [x] `examples/todo-api` — a real, tested project using the standard.
 
 ## Later / unscheduled
 
