@@ -1,0 +1,31 @@
+title: Engineering Loop Standard
+description: >-
+  An open, agent-agnostic specification for disciplined, AI-assisted
+  software engineering.
+remote_theme: just-the-docs/just-the-docs
+
+url: "https://sergiorebolledo.github.io"
+baseurl: "/engineering-loop-standard"
+
+search_enabled: true
+
+# docs/memory/ is this repo's own internal project memory (dogfooding the
+# standard on itself), not end-user documentation - keep it out of the
+# published site.
+exclude:
+  - memory/
+
+nav_external_links:
+  - title: GitHub repository
+    url: https://github.com/sergiorebolledo/engineering-loop-standard
+  - title: npm package
+    url: https://www.npmjs.com/package/engineering-loop
+
+footer_content: >-
+  Engineering Loop Standard is MIT licensed. Source and issues on
+  <a href="https://github.com/sergiorebolledo/engineering-loop-standard">GitHub</a>.
+
+callouts:
+  important:
+    title: Important
+    color: red

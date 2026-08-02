@@ -1,6 +1,6 @@
 # Writing an adapter
 
-An adapter turns `engineering-loop.json` + [MANIFESTO.md](../MANIFESTO.md)
+An adapter turns `engineering-loop.json` + [MANIFESTO.md](https://github.com/sergiorebolledo/engineering-loop-standard/blob/main/MANIFESTO.md)
 into one AI coding tool's native configuration format. The CLI
 (`packages/cli`) ships five adapters out of the box; this document describes
 the interface so a sixth can be added without touching core logic.

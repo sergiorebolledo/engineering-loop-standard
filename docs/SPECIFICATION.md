@@ -1,3 +1,8 @@
+---
+title: Specification
+nav_order: 2
+---
+
 # Engineering Loop Standard — Specification v1.0.0
 
 Status: Draft. Versioned independently of the `engineering-loop` CLI package.
@@ -10,7 +15,7 @@ agent operating on it. An agent that follows this specification is expected
 to:
 
 1. Read `engineering-loop.json` at the project root before acting.
-2. Treat the manifesto in [MANIFESTO.md](../MANIFESTO.md) as binding.
+2. Treat the manifesto in [MANIFESTO.md](https://github.com/sergiorebolledo/engineering-loop-standard/blob/main/MANIFESTO.md) as binding.
 3. Execute the 10-phase loop (§3) for any non-trivial change.
 4. Read and write the persistent memory files described in §4.
 5. Respect the `language_policy` declared in the config (§2.5).
@@ -22,7 +27,7 @@ adapter (§5) for it.
 ## 2. The configuration file
 
 `engineering-loop.json` is the single source of truth. Its shape is defined
-formally by [engineering-loop.schema.json](../engineering-loop.schema.json)
+formally by [engineering-loop.schema.json](https://github.com/sergiorebolledo/engineering-loop-standard/blob/main/engineering-loop.schema.json)
 (JSON Schema draft 2020-12). Key sections:
 
 ### 2.1 `project`
@@ -140,5 +145,6 @@ ELS follows semver. A change to `engineering-loop.schema.json` that removes
 a field, changes a field's type, or changes required-ness is a MAJOR change.
 Adding an optional field is MINOR. Wording clarifications in this document
 are PATCH. Every version change is recorded in
-[CHANGELOG.md](../CHANGELOG.md) and, for the "why," in
-[docs/memory/DECISIONS.md](memory/DECISIONS.md).
+[CHANGELOG.md](https://github.com/sergiorebolledo/engineering-loop-standard/blob/main/CHANGELOG.md)
+and, for the "why," in
+[docs/memory/DECISIONS.md](https://github.com/sergiorebolledo/engineering-loop-standard/blob/main/docs/memory/DECISIONS.md).
