@@ -41,6 +41,12 @@ npm run doctor   # validates this repo against its own standard
 All four of those (`build`, `test`, `lint`, `doctor`) are what CI runs on
 every push and PR — run them locally before opening a PR.
 
+**Node version:** the published `engineering-loop` CLI supports Node >= 18
+(see `engines` in `packages/cli/package.json`), but running this repo's own
+test suite requires Node >= 20 — vitest 4 depends on `util.styleText`,
+which Node 18 doesn't have. See ADR-006 in
+[docs/memory/DECISIONS.md](docs/memory/DECISIONS.md).
+
 ## Proposing a change to the specification
 
 1. Open an issue first if the change affects the schema's required fields,

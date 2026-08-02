@@ -10,6 +10,13 @@ See [ROADMAP.md](ROADMAP.md) for v1.1.0 and later.
 
 ## Done (recent)
 
+- 2026-08-02: Fixed CI break caused by the vitest 4 bump (ADR-006) — Node 18
+  can't run vitest 4 (`util.styleText` needs Node >= 20). Split CI into a
+  `test` job (Node 20/22/24) and a `runtime-compat` job that packs and
+  installs the real tarball on Node 18/20/22 to prove the published CLI's
+  `engines: ">=18"` claim empirically, without needing vitest at all.
+  Corrected a stale claim in `docs/memory/PROJECT.md` that the CLI was
+  built with `tsup` (it's `tsc`) while in there.
 - 2026-08-02: Cleared all 4 `npm audit` findings (esbuild dev-server
   vulnerability, transitive via vite/vite-node) by bumping vitest
   1.6 -> 4.1.10 in `packages/cli`. Dev-dependency only — no change to the

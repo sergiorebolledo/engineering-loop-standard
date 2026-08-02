@@ -4,6 +4,31 @@ Architecture Decision Records. Newest first.
 
 ---
 
+## ADR-006: CI drops Node 18 for the test job, keeps it for a runtime-compat job
+
+**Date:** 2026-08-02
+**Status:** Accepted
+
+Bumping vitest 1.6 -> 4.1.10 (to clear an `npm audit` finding — see the
+vitest bump commit) broke `npm test` on Node 18 in CI:
+`SyntaxError: The requested module 'node:util' does not provide an export
+named 'styleText'`. That export ships in `rolldown`, a vitest 4 dependency,
+and `util.styleText` requires Node >= 20. Node 18 itself has also been EOL
+upstream since April 2025.
+
+This is a constraint on *this repo's dev tooling*, not on the published
+`engineering-loop` package — the compiled `dist/*.js` only uses
+`commander`, `ajv`, and `node:fs`/`node:path`/`node:url`, none of which
+need Node 20. Changing `packages/cli/package.json`'s `engines: ">=18"` to
+match the test tooling would have incorrectly narrowed what the published
+CLI actually supports.
+
+Resolved by splitting `.github/workflows/ci.yml` into two jobs: `test`
+(build/lint/test/doctor, Node 20/22/24 — where vitest 4 works) and
+`runtime-compat` (pack the tarball, install it, run `init`/`doctor` without
+touching vitest, on Node 18/20/22 — proving the `engines` claim empirically
+instead of just asserting it).
+
 ## ADR-005: Schema `$id`/`$schema` point at a tagged raw GitHub URL, not the aspirational domain
 
 **Date:** 2026-08-02

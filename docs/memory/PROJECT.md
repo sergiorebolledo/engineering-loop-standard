@@ -22,8 +22,11 @@ want to make their agent ELS-compliant by shipping an adapter.
 
 - Specification: Markdown + JSON Schema (draft 2020-12), no runtime
   dependency.
-- CLI: TypeScript, Node.js >= 18, built with `tsup`, tested with `vitest`,
-  distributed as the `engineering-loop` npm package.
+- CLI: TypeScript, built with `tsc`, tested with `vitest` 4, distributed as
+  the `engineering-loop` npm package. The published CLI runs on
+  Node.js >= 18 (see `engines` in `packages/cli/package.json`); running
+  this repo's own test suite needs Node >= 20, since vitest 4 requires it
+  (see ADR-006).
 - No database, no backend service — this is a spec + a local CLI.
 
 ## Language policy
