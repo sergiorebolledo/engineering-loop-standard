@@ -23,7 +23,7 @@
       `docs/SPECIFICATION.md`, with the schema eventually served from there
       and registered on [SchemaStore.org](https://www.schemastore.org/).
 - [ ] Adapter for Windsurf.
-- [ ] CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md.
+- [x] CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md.
 - [ ] `examples/` with a real project using the standard.
 
 ## Later / unscheduled

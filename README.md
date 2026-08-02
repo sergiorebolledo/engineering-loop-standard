@@ -187,11 +187,14 @@ changes to `engineering-loop.schema.json` bump the major version and are
 recorded in [CHANGELOG.md](CHANGELOG.md) and
 [docs/memory/DECISIONS.md](docs/memory/DECISIONS.md).
 
-## Contributing an adapter
+## Contributing
 
-New agent adapters are welcome. See
-[docs/ADAPTERS.md](docs/ADAPTERS.md) for the interface a `packages/cli/src/adapters/*`
-module must implement.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for dev setup, how to propose a
+change to the specification, and commit/PR conventions. New agent adapters
+are especially welcome — see [docs/ADAPTERS.md](docs/ADAPTERS.md) for the
+interface a `packages/cli/src/adapters/*` module must implement. This
+project follows a [Code of Conduct](CODE_OF_CONDUCT.md); report
+vulnerabilities per [SECURITY.md](SECURITY.md).
 
 ## License
 
