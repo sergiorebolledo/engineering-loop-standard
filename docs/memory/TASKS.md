@@ -2,15 +2,24 @@
 
 ## Active
 
-- `engineering-loop@1.0.2` (path-traversal fix in `doctor`, ADR-007) is
-  built and verified but not yet published — awaiting go-ahead.
+- None — see [ROADMAP.md](ROADMAP.md) v1.2.0 for what's next
+  (`engineering-loop.org` docs site + SchemaStore registration).
 
 ## Backlog
 
-See [ROADMAP.md](ROADMAP.md) for v1.1.0 and later.
+See [ROADMAP.md](ROADMAP.md) for v1.2.0 and later.
 
 ## Done (recent)
 
+- 2026-08-02: Shipped v1.1.0 — `engineering-loop sync` (managed-block
+  merge, ADR-008) and a Windsurf adapter, both requested by the
+  maintainer. Caught and fixed a real idempotency bug before publishing
+  (ADR-009: `sync` was duplicating a trailing newline on every run).
+  Regenerated `examples/todo-api` for the new format using `sync` itself
+  — the workflow the feature exists for. Published
+  `engineering-loop@1.1.0` to npm, verified live via `npx`.
+- 2026-08-02: Published `engineering-loop@1.0.2` (the `doctor`
+  path-traversal fix, ADR-007) to npm, verified live via `npx`.
 - 2026-08-02: Security review (maintainer-requested, OWASP-informed):
   full secret scan of the working tree and entire git history (clean, 0
   hits), reviewed `packages/cli/src` for injection/traversal/eval risk
