@@ -22,7 +22,8 @@ can contribute to, and they have different bars for change:
   on technical direction is normal and welcome; personal attacks aren't.
   Full expectations in [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
 - Every non-trivial PR should follow the same loop this project asks agents
-  to follow (see `CLAUDE.md` / `MANIFESTO.md`): understand the existing
+  to follow (see [MANIFESTO.md](MANIFESTO.md) /
+  [docs/SPECIFICATION.md](docs/SPECIFICATION.md)): understand the existing
   code, plan the change, implement it, verify it, and update
   `docs/memory/` if the change makes something there stale.
 

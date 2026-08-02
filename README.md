@@ -21,6 +21,18 @@ standard. That gap is what this repository fills.
 
 ---
 
+### Contents
+
+- [Why a standard instead of another prompt file](#why-a-standard-instead-of-another-prompt-file)
+- [Architecture](#architecture)
+- [The manifesto](#the-manifesto)
+- [The 10-phase loop](#the-10-phase-loop)
+- [Quick start](#quick-start)
+- [The configuration file](#the-configuration-file)
+- [Repository layout](#repository-layout)
+- [Versioning](#versioning)
+- [Contributing](#contributing)
+
 ## Why a standard instead of another prompt file
 
 | | Traditional prompt files | Engineering Loop Standard |
@@ -33,31 +45,34 @@ standard. That gap is what this repository fills.
 
 ## Architecture
 
-```
-                   ┌───────────────────────────────────┐
-                   │      ENGINEERING LOOP STANDARD     │
-                   │        (engineering-loop.json)     │
-                   └──────────────────┬──────────────────┘
-                                      │
-          ┌────────────────────────────┼────────────────────────────┐
-          ▼                            ▼                            ▼
-┌───────────────────┐        ┌───────────────────┐        ┌───────────────────┐
-│  Claude Adapter    │        │  Cursor / Aider    │        │  Codex / Gemini    │
-│  (CLAUDE.md)        │        │  (.cursorrules,     │        │  (AGENTS.md /       │
-│                      │        │   CONVENTIONS.md)   │        │   system prompts)   │
-└──────────┬──────────┘        └──────────┬──────────┘        └──────────┬──────────┘
-           │                              │                              │
-           └──────────────────────────────┼──────────────────────────────┘
-                                          ▼
-                   ┌───────────────────────────────────┐
-                   │         DEVELOPER'S REPOSITORY      │
-                   │   (docs/memory/, loop, validation)  │
-                   └───────────────────────────────────┘
+One config, one memory convention, one manifesto — many adapters. Every
+adapter is a pure function of `engineering-loop.json`: same config in, same
+generated file out, no hidden state.
+
+```mermaid
+flowchart TD
+    Config["<b>engineering-loop.json</b><br/>single source of truth"]
+
+    Config --> ClaudeA["Claude Code adapter"]
+    Config --> CursorA["Cursor adapter"]
+    Config --> AiderA["Aider adapter"]
+    Config --> CodexA["Codex / Gemini adapter"]
+
+    ClaudeA --> ClaudeF["CLAUDE.md"]
+    CursorA --> CursorF[".cursorrules"]
+    AiderA --> AiderF["CONVENTIONS.md"]
+    CodexA --> CodexF["AGENTS.md"]
+
+    ClaudeF --> Repo
+    CursorF --> Repo
+    AiderF --> Repo
+    CodexF --> Repo
+
+    Repo["<b>Developer's repository</b><br/>docs/memory/ · 10-phase loop · engineering-loop doctor"]
 ```
 
-One config, one memory convention, one manifesto — many adapters. See
-[docs/ADAPTERS.md](docs/ADAPTERS.md) for how an adapter is generated and how
-to add support for a new tool.
+See [docs/ADAPTERS.md](docs/ADAPTERS.md) for how an adapter is generated and
+how to add support for a new tool.
 
 ## The manifesto
 
@@ -74,13 +89,26 @@ every adapter this project generates:
 ## The 10-phase loop
 
 Every task — feature, bugfix, refactor, or infra change — moves through the
-same loop, defined in full in [docs/SPECIFICATION.md](docs/SPECIFICATION.md):
+same loop, defined in full (with per-phase exit conditions) in
+[docs/SPECIFICATION.md](docs/SPECIFICATION.md):
 
+```mermaid
+flowchart LR
+    P1["1. Context"] --> P2["2. Research"]
+    P2 --> P3["3. Plan"]
+    P3 --> P4["4. Risks"]
+    P4 --> P5["5. Implement"]
+    P5 --> P6["6. Test"]
+    P6 --> P7["7. Heal / Fix"]
+    P7 --> P8["8. Refactor"]
+    P8 --> P9["9. Document"]
+    P9 --> P10["10. Summary"]
+    P10 -. next task .-> P1
 ```
-[1 CONTEXT] -> [2 RESEARCH] -> [3 PLAN] -> [4 RISKS] -> [5 IMPLEMENT]
-                                                              |
-[10 SUMMARY] <- [9 DOCUMENT] <- [8 REFACTOR] <- [7 HEAL/FIX] <- [6 TEST]
-```
+
+An agent may collapse phases for trivial changes, but must not skip Phase 6
+(Test) or Phase 9 (Document) for anything that touches tracked source
+files (§3 of the specification).
 
 ## Quick start
 
@@ -167,7 +195,6 @@ generated from. Full schema at
 ├── engineering-loop.json          # This repo's own config (dogfooded)
 ├── engineering-loop.schema.json   # Formal JSON Schema for the config
 ├── MANIFESTO.md                   # Standalone Agentic Engineering Manifesto
-├── CLAUDE.md                      # Claude Code adapter for this repo
 ├── CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md
 ├── docs/
 │   ├── SPECIFICATION.md           # Full standard, versioned

@@ -2,7 +2,8 @@
 
 ## Active
 
-- None — see [ROADMAP.md](ROADMAP.md) v1.1.0 for what's next.
+- `engineering-loop@1.0.2` (path-traversal fix in `doctor`, ADR-007) is
+  built and verified but not yet published — awaiting go-ahead.
 
 ## Backlog
 
@@ -10,6 +11,16 @@ See [ROADMAP.md](ROADMAP.md) for v1.1.0 and later.
 
 ## Done (recent)
 
+- 2026-08-02: Security review (maintainer-requested, OWASP-informed):
+  full secret scan of the working tree and entire git history (clean, 0
+  hits), reviewed `packages/cli/src` for injection/traversal/eval risk
+  (none — no `child_process`/`eval` anywhere in the codebase), hardened
+  `doctor` against a path-traversal read via a crafted `memory.directory`
+  / `required_files` (ADR-007), and added a 1 MB request-body cap to
+  `examples/todo-api` (OWASP API4:2023, was unbounded). Removed the
+  repo-root `CLAUDE.md` — sent the wrong signal for an agent-agnostic
+  standard — and fixed the dangling references it left behind. Reworked
+  the README with Mermaid diagrams instead of ASCII art.
 - 2026-08-02: Fixed CI break caused by the vitest 4 bump (ADR-006) — Node 18
   can't run vitest 4 (`util.styleText` needs Node >= 20). Split CI into a
   `test` job (Node 20/22/24) and a `runtime-compat` job that packs and

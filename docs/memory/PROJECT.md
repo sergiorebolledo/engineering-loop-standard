@@ -33,8 +33,8 @@ want to make their agent ELS-compliant by shipping an adapter.
 
 All code, comments, docs, commit messages, and CLI output are English only,
 per `language_policy` in [engineering-loop.json](../../engineering-loop.json)
-and [CLAUDE.md](../../CLAUDE.md). This applies even when the maintainer
-communicates with an agent in another language.
+and [MANIFESTO.md](../../MANIFESTO.md). This applies even when the
+maintainer communicates with an agent in another language.
 
 ## Current status
 

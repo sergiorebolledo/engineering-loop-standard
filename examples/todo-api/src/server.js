@@ -1,6 +1,13 @@
 import { createServer } from "node:http";
 import { randomUUID } from "node:crypto";
 
+// Caps how much of a request body we'll buffer in memory before giving up.
+// Without this, an unbounded POST body is a trivial memory-exhaustion DoS
+// (OWASP API4:2023 - Unrestricted Resource Consumption).
+const MAX_BODY_BYTES = 1_000_000; // 1 MB - generous for a todo title
+
+class PayloadTooLargeError extends Error {}
+
 export function createTodoStore() {
   const todos = new Map();
   return {
@@ -33,7 +40,12 @@ export function createApp(store = createTodoStore()) {
       let body;
       try {
         body = await readJsonBody(req);
-      } catch {
+      } catch (error) {
+        if (error instanceof PayloadTooLargeError) {
+          res.writeHead(413);
+          res.end(JSON.stringify({ error: "request body too large" }));
+          return;
+        }
         res.writeHead(400);
         res.end(JSON.stringify({ error: "invalid JSON body" }));
         return;
@@ -65,17 +77,32 @@ export function createApp(store = createTodoStore()) {
 
 function readJsonBody(req) {
   return new Promise((resolve, reject) => {
-    let raw = "";
+    const chunks = [];
+    let receivedBytes = 0;
+    let overLimit = false;
+
     req.on("data", (chunk) => {
-      raw += chunk;
+      if (overLimit) return;
+      receivedBytes += chunk.length;
+      if (receivedBytes > MAX_BODY_BYTES) {
+        // Stop buffering and let the caller respond (413) over the still-open
+        // connection - destroying the socket here would reset it before any
+        // response bytes could be written.
+        overLimit = true;
+        req.pause();
+        reject(new PayloadTooLargeError());
+        return;
+      }
+      chunks.push(chunk);
     });
     req.on("end", () => {
-      if (!raw) {
+      if (overLimit) return;
+      if (chunks.length === 0) {
         resolve(undefined);
         return;
       }
       try {
-        resolve(JSON.parse(raw));
+        resolve(JSON.parse(Buffer.concat(chunks).toString("utf8")));
       } catch (error) {
         reject(error);
       }

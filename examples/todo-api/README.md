@@ -33,8 +33,13 @@ No `npm install` needed — there are no dependencies.
 | Method | Path | Body | Response |
 |---|---|---|---|
 | `GET` | `/todos` | — | `200`, `[]` or list of todos |
-| `POST` | `/todos` | `{"title": "..."}` | `201` + created todo, or `400` if title is missing/blank |
+| `POST` | `/todos` | `{"title": "..."}` | `201` + created todo, `400` if title is missing/blank or JSON is malformed, `413` if the body exceeds 1 MB |
 | `DELETE` | `/todos/:id` | — | `204` on success, `404` if unknown |
+
+This is a demo, not a hardened production service — there's no auth, no
+rate limiting, and storage is in-memory only. The 1 MB body cap on `POST`
+is the one deliberate hardening choice here, added to avoid an obvious
+memory-exhaustion footgun (OWASP API4:2023) in code meant to be copied.
 
 ## How this was built
 

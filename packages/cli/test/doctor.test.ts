@@ -1,4 +1,4 @@
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
@@ -48,5 +48,32 @@ describe("runDoctor", () => {
     await writeFile(join(dir, "engineering-loop.json"), JSON.stringify({ version: "1.0.0" }), "utf-8");
     const report = await runDoctor(dir);
     expect(report.ok).toBe(false);
+  });
+
+  it("rejects a required_files entry that escapes the memory directory", async () => {
+    await runInit({ dir, name: "my-app" });
+    const configPath = join(dir, "engineering-loop.json");
+    const config = JSON.parse(await readFile(configPath, "utf-8"));
+    config.memory.required_files = ["../../../../etc/passwd"];
+    await writeFile(configPath, JSON.stringify(config), "utf-8");
+
+    const report = await runDoctor(dir);
+    expect(report.ok).toBe(false);
+    const traversalCheck = report.checks.find((c) => c.name.includes("passwd"));
+    expect(traversalCheck?.passed).toBe(false);
+    expect(traversalCheck?.detail).toMatch(/resolves outside/);
+  });
+
+  it("rejects a memory.directory that escapes the project root", async () => {
+    await runInit({ dir, name: "my-app" });
+    const configPath = join(dir, "engineering-loop.json");
+    const config = JSON.parse(await readFile(configPath, "utf-8"));
+    config.memory.directory = "../../outside";
+    await writeFile(configPath, JSON.stringify(config), "utf-8");
+
+    const report = await runDoctor(dir);
+    expect(report.ok).toBe(false);
+    const escapeCheck = report.checks.find((c) => c.name === "memory.directory stays inside the project");
+    expect(escapeCheck?.passed).toBe(false);
   });
 });

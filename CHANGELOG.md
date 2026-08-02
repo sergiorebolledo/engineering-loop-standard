@@ -4,6 +4,36 @@ All notable changes to the Engineering Loop Standard follow
 [Conventional Commits](https://www.conventionalcommits.org/) and this
 project's own semver (§6 of [docs/SPECIFICATION.md](docs/SPECIFICATION.md)).
 
+## [engineering-loop@1.0.2] - 2026-08-02
+
+### Security
+
+- `fix(cli)`: `doctor` read `memory.directory` and `memory.required_files`
+  straight from an `engineering-loop.json` that may not have been authored
+  by the current user (e.g. running `doctor` against a cloned project). A
+  crafted `"../../../../etc/passwd"` entry would resolve outside the
+  project without any bound check before the existence test — low severity
+  (existence check only, no read/write) but CWE-22-shaped. `doctor` now
+  fails cleanly instead of resolving a path outside its parent. See ADR-007
+  in [docs/memory/DECISIONS.md](docs/memory/DECISIONS.md).
+- `chore`: bumped `vitest` 1.6 -> 4.1.10 in `packages/cli`, clearing all 4
+  `npm audit` findings (an esbuild dev-server vulnerability, transitive via
+  vite/vite-node). Dev-dependency only; nothing shipped in the published
+  package changed.
+
+### Other
+
+- `docs`: removed the repo-root `CLAUDE.md` — this project's positioning is
+  agent-agnostic, and a Claude-specific file sitting at the root sent the
+  wrong signal. The "claude" adapter and its generated output for
+  *consumer* projects are unaffected.
+- `docs`: README now uses Mermaid diagrams (architecture, 10-phase loop)
+  instead of ASCII art, plus a table of contents.
+- `ci`: split into a `test` job (Node 20/22/24, needs vitest 4) and a
+  `runtime-compat` job that packs and runs the real tarball on Node
+  18/20/22 without vitest, to keep proving the CLI's `engines: ">=18"`
+  claim now that the test suite itself needs Node >= 20. See ADR-006.
+
 ## [engineering-loop@1.0.1] - 2026-08-02
 
 ### Fixed

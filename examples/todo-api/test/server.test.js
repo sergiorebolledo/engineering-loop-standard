@@ -61,6 +61,21 @@ test("POST /todos rejects invalid JSON", async () => {
   });
 });
 
+test("POST /todos rejects a body over the size cap", async () => {
+  await withServer(async (baseUrl) => {
+    const oversized = JSON.stringify({ title: "x".repeat(1_100_000) });
+    const res = await fetch(`${baseUrl}/todos`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: oversized,
+    });
+    assert.equal(res.status, 413);
+
+    const list = await (await fetch(`${baseUrl}/todos`)).json();
+    assert.equal(list.length, 0);
+  });
+});
+
 test("DELETE /todos/:id removes a todo", async () => {
   await withServer(async (baseUrl) => {
     const created = await (
