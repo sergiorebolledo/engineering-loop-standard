@@ -1,0 +1,14 @@
+{
+  "name": "engineering-loop-standard",
+  "private": true,
+  "description": "Open, agent-agnostic specification and tooling for disciplined AI-assisted software engineering.",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace packages/cli",
+    "test": "npm test --workspace packages/cli",
+    "lint": "npm run lint --workspace packages/cli"
+  }
+}

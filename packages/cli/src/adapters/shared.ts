@@ -1,0 +1,47 @@
+import type { EngineeringLoopConfig } from "../types.js";
+
+export const MANIFESTO_PRINCIPLES = [
+  "Understand before acting. Never write code without full contextual knowledge.",
+  "Research before building. Search the repository for existing patterns before creating new ones.",
+  "Plan before execution. Draft a clear, step-by-step plan and assess risks before changing files.",
+  "Verify before completing. Run tests, linters, and type checks. An unverified change is an incomplete change.",
+  "Document as you go. Project memory must always reflect current reality.",
+  "Leave the codebase better than you found it. Maintain continuous refactoring and clean code principles.",
+];
+
+export const LOOP_PHASES = [
+  "Context Retrieval",
+  "Repository Research",
+  "Implementation Plan",
+  "Risk & Impact Assessment",
+  "Implementation",
+  "Automated Testing & Verification",
+  "Self-Healing & Bug Fixing",
+  "Refactoring",
+  "Memory & Documentation Update",
+  "Task Summary",
+];
+
+export function renderLanguagePolicyLine(config: EngineeringLoopConfig): string {
+  const policy = config.language_policy;
+  if (!policy) return "All code, comments, and documentation must be written in English.";
+  const parts = Object.entries(policy)
+    .filter((entry): entry is [string, string] => typeof entry[1] === "string")
+    .map(([key, value]) => `${key}=${value}`);
+  return `Required languages by artifact: ${parts.join(", ")}.`;
+}
+
+export function renderCommandsBlock(config: EngineeringLoopConfig): string[] {
+  const commands = config.commands ?? {};
+  const lines: string[] = [];
+  for (const [key, value] of Object.entries(commands)) {
+    if (value) lines.push(`- ${key}: \`${value}\``);
+  }
+  return lines;
+}
+
+export function renderMemorySection(config: EngineeringLoopConfig): string {
+  const dir = config.memory.directory;
+  const files = config.memory.required_files.join(", ");
+  return `Persistent project memory lives in \`${dir}/\` (${files}). Read it during Phase 1 (Context Retrieval) and update whatever it makes stale during Phase 9 (Memory & Documentation Update).`;
+}

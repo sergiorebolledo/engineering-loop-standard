@@ -1,0 +1,48 @@
+{
+  "name": "engineering-loop",
+  "version": "1.0.0",
+  "description": "CLI for the Engineering Loop Standard: scaffold engineering-loop.json, persistent project memory, and multi-tool AI agent adapters.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "engineering-loop": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "templates",
+    "schema"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "prebuild": "node scripts/sync-schema.mjs",
+    "build": "tsc -p tsconfig.json",
+    "pretest": "node scripts/sync-schema.mjs",
+    "test": "vitest run",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "ajv": "^8.14.0",
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.0",
+    "vitest": "^1.6.0"
+  },
+  "keywords": [
+    "engineering-loop",
+    "ai-agents",
+    "claude-code",
+    "cursor",
+    "aider",
+    "codex",
+    "specification",
+    "cli"
+  ]
+}

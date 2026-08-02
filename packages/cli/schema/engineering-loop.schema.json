@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://engineering-loop.org/schema/v1.json",
+  "title": "Engineering Loop Standard Configuration",
+  "description": "Formal schema for engineering-loop.json, the single source of truth an Engineering Loop Standard adapter is generated from.",
+  "type": "object",
+  "required": ["version", "project", "memory"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Pointer back to this schema, for editor validation."
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the Engineering Loop Standard this config conforms to, in semver.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "project": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "architecture_style": {
+          "type": "string",
+          "description": "Free-text label, e.g. modular-monolith, microservices, monorepo, cli-tool."
+        }
+      }
+    },
+    "memory": {
+      "type": "object",
+      "required": ["directory", "required_files"],
+      "additionalProperties": false,
+      "properties": {
+        "directory": {
+          "type": "string",
+          "description": "Path, relative to the project root, holding persistent memory files.",
+          "default": "docs/memory"
+        },
+        "required_files": {
+          "type": "array",
+          "description": "Filenames that must exist inside the memory directory.",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "default": [
+            "PROJECT.md",
+            "ARCHITECTURE.md",
+            "ROADMAP.md",
+            "TASKS.md",
+            "DECISIONS.md",
+            "KNOWLEDGE.md"
+          ]
+        }
+      }
+    },
+    "pipeline": {
+      "type": "object",
+      "description": "Ordered phase names run before and after code changes. Phase names are free-text so tools can extend them.",
+      "additionalProperties": false,
+      "properties": {
+        "pre_code": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": ["research", "plan"]
+        },
+        "post_code": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": ["lint", "test", "refactor", "update_docs"]
+        }
+      }
+    },
+    "commands": {
+      "type": "object",
+      "description": "Shell commands an agent should run for each verification step.",
+      "additionalProperties": { "type": "string" },
+      "properties": {
+        "test": { "type": "string" },
+        "lint": { "type": "string" },
+        "build": { "type": "string" },
+        "format": { "type": "string" }
+      }
+    },
+    "language_policy": {
+      "type": "object",
+      "description": "ISO 639-1 language codes required for each artifact category.",
+      "additionalProperties": { "type": "string", "pattern": "^[a-z]{2}$" },
+      "properties": {
+        "code": { "type": "string", "pattern": "^[a-z]{2}$", "default": "en" },
+        "comments": { "type": "string", "pattern": "^[a-z]{2}$", "default": "en" },
+        "docs": { "type": "string", "pattern": "^[a-z]{2}$", "default": "en" },
+        "commits": { "type": "string", "pattern": "^[a-z]{2}$", "default": "en" }
+      }
+    },
+    "agents": {
+      "type": "object",
+      "description": "Behavioral limits applied to any agent following this config.",
+      "additionalProperties": false,
+      "properties": {
+        "allow_auto_fix": {
+          "type": "boolean",
+          "description": "Whether an agent may automatically repair failing tests/lint without asking first.",
+          "default": true
+        },
+        "max_repair_iterations": {
+          "type": "integer",
+          "description": "Upper bound on Phase 7 (Self-Healing) retry loops before an agent must stop and ask for help.",
+          "minimum": 1,
+          "default": 3
+        }
+      }
+    },
+    "adapters": {
+      "type": "array",
+      "description": "Adapters to generate when running `engineering-loop init` or `engineering-loop sync`.",
+      "items": {
+        "type": "string",
+        "enum": ["claude", "cursor", "aider", "codex", "gemini"]
+      },
+      "default": ["claude", "cursor", "aider", "codex"]
+    }
+  }
+}

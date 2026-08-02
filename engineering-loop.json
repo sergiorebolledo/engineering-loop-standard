@@ -1,0 +1,40 @@
+{
+  "$schema": "./engineering-loop.schema.json",
+  "version": "1.0.0",
+  "project": {
+    "name": "engineering-loop-standard",
+    "description": "Open, agent-agnostic specification and tooling for disciplined AI-assisted software engineering.",
+    "architecture_style": "spec-plus-cli-monorepo"
+  },
+  "memory": {
+    "directory": "docs/memory",
+    "required_files": [
+      "PROJECT.md",
+      "ARCHITECTURE.md",
+      "ROADMAP.md",
+      "TASKS.md",
+      "DECISIONS.md",
+      "KNOWLEDGE.md"
+    ]
+  },
+  "pipeline": {
+    "pre_code": ["research", "plan"],
+    "post_code": ["lint", "test", "refactor", "update_docs"]
+  },
+  "commands": {
+    "test": "npm test --workspace packages/cli",
+    "lint": "npm run lint --workspace packages/cli",
+    "build": "npm run build --workspace packages/cli"
+  },
+  "language_policy": {
+    "code": "en",
+    "comments": "en",
+    "docs": "en",
+    "commits": "en"
+  },
+  "agents": {
+    "allow_auto_fix": true,
+    "max_repair_iterations": 3
+  },
+  "adapters": ["claude", "cursor", "aider", "codex"]
+}
